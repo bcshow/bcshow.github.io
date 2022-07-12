@@ -1,0 +1,39 @@
+<html>
+<script>
+maxaudio=30;
+colcount=0;
+
+function gogo(){
+  maxaudio=30;
+  colcount=0;
+
+  ina=0;
+
+  while(ina<1 || ina > 100) {
+    ina = parseInt(prompt("Starting number: 1 to 100",50));
+  }  
+  textout="";
+  while(ina !== 1){
+    ina = (ina%2 === 0? ina/2:ina*3+1);
+    colcount++;
+    textout+="<div style=\"position: absolute; left:"+Math.floor(Math.random()*600)+"; top:"+Math.floor(Math.random()*600)+"; font-size: 36pt\">&#129462;</div>";
+  }
+
+  maxaudio=colcount;  
+  document.body.innerHTML = textout;
+}
+
+</script>
+<body onclick="gogo()">
+<h1>Ludum Dare 50!</h1>
+<h3>Delay the Inevitable</h3>
+<p>Yeah, yeah.  All those games where the sole purpose is to not die?  We're turning that thought on its head.  Delay the inevitable but arrive at death!</p>
+
+<p>The Collatz Conjecture is about a simple algorithm to generate a list of numbers from a seed number.  Although we have tested numbers upwards of a billion, it has yet to be proven for all whole numbers > 0 that the list will eventually have the number 1.  The algorithm is super simple to get from one number to the next.  Start with any number.  If it is even, divide it by two to get the next number.  If it is odd, multiply it by 3 and then add 1 to get the next number.  For example.  Let's start with the number 10.  10 is even.  We divide by 2 to get the next number 5.  5 is odd so we multiply it by 3 and add 1 to get the next number 16.  16 is even.  We divide by 2 to get the next number 8.  The entire sequence starting from 10 is: 10, 5, 16, 8, 4, 2, 1.</p>
+
+<p>It's just a fun little mathy world!  Enjoy!</p>
+
+<p id="outr"></p>
+
+</body>
+</html>

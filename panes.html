@@ -1,0 +1,242 @@
+<html>
+<head>
+<style>
+body {
+  background: #303030;
+  color: white;
+  font-size: 24pt;
+  overflow: hidden;
+}
+
+div {
+  font-size: 16pt;
+}
+</style>
+<script>
+pzConDown=false;
+
+window.onkeydown=function(e){
+  if(e.key === "z") pzConDown = true;
+}
+
+window.onkeyup=function(e){
+  if(e.key === "z") pzConDown = false;
+}
+
+window.onmousedown=function(e){
+  if(pzConDown) {
+    divvy = document.getElementById(pzGetVar("current div"));
+    divvy.style.position="absolute";
+    divvy.style.right="";
+    divvy.style.bottom="";
+    divvy.style.top=(e.pageY-10)+"px";
+    divvy.style.left=(e.pageX-10)+"px";
+  }
+}
+
+
+pzLastDiv=0;
+pzFuncC=[];
+pzNameE=[];
+pzValuU=[];
+
+function pzInitDiv(){
+  ++pzLastDiv;
+  document.body.innerHTML+="<div id=\"phDiv"+pzLastDiv+"\" onclick=\"pzSelect(\'phDiv"+pzLastDiv+"\')\" style=\"position: absolute; overflow: visible\"></div>";
+  return("phDiv"+pzLastDiv);
+}
+
+function pzSelect(inDivName){
+  if(!pzConDown)
+  {
+
+  pzSetVar("current div",inDivName);
+  
+  for(a=0;a<document.getElementsByTagName("div").length;a++){
+    document.getElementsByTagName('div')[a].style.border="none";
+  }
+
+  document.getElementById(inDivName).style.border="5px red solid";
+
+  }
+}
+
+
+function pzSetVar(inName, inValu){
+  if(pzNameE.indexOf(inName)+1>0){
+    pzValuU[pzNameE.indexOf(inName)] = inValu;
+  }
+  else{
+    pzNameE.push(inName);
+    pzValuU.push(inValu);
+  }
+}
+
+function pzGetVar(inName){
+    return(pzValuU[pzNameE.indexOf(inName)]);
+}
+
+window.onload=function(){
+  for(a=0;a<pzFuncC.length;a++){
+    pzFuncC[a]();
+  }
+}
+</script>
+<script>
+zzzzzdiv="";
+
+function zzzzzsetup()
+{
+  zzzzzDivName = pzInitDiv();
+  zzzzzdiv = document.getElementById(zzzzzDivName);
+  zzzzzdiv.innerHTML="<span>HELLO!!</span><hr>"+(new Date()).getTime();
+// zzzzzdiv.style.border="1px red solid";
+  zzzzzdiv.style.position="absolute";
+  zzzzzdiv.style.bottom="0px";
+  zzzzzdiv.style.right="0px";
+
+}
+
+pzFuncC.push(zzzzzsetup);
+pzSetVar("first name","Scott");
+pzSetVar("last name","Joplin");
+
+</script>
+<script>
+z2zzzzdiv="";
+
+function z2zzzzsetup()
+{
+  z2zzzzDivName = pzInitDiv();
+  z2zzzzdiv = document.getElementById(z2zzzzDivName);
+
+  htmlout = "Multiplication Table:<br><table border=\"1px\">";
+  for(z1=0;z1<=13;z1++)
+  {
+    htmlout+="<tr>";
+    for(z2=0;z2<=13;z2++)
+    {
+      z11=z1-1;
+      z22=z2-1;
+      htmlout+="<td id=\"z2zzzz"+(z1*100+z2)+"\" onmouseover=\"z2zzzzShine("+z1+","+z2+")\">"+(z1*z2===0?(z1===0?(z2===0?"X":z2-1):z1-1):z11*z22)+"</td>";
+    }
+    htmlout+="</tr>";
+  }
+  htmlout+="</table>";
+
+  z2zzzzdiv.innerHTML += htmlout;
+
+  z2zzzzdiv.style.position="absolute";
+  z2zzzzdiv.style.bottom="0px";
+  z2zzzzdiv.style.left="0px";
+
+}
+
+function z2zzzzShine(inc, inr){
+  for(za1=0;za1<=13;za1++)
+  {
+    for(za2=0;za2<=13;za2++)
+    {
+       tempid="z2zzzz"+(za1*100+za2);
+       document.getElementById(tempid).style.background="";
+       if(za1===inc) document.getElementById(tempid).style.background="red";
+       if(za2===inr) document.getElementById(tempid).style.background="green";
+       if((za2===inr) && (za1===inc)) document.getElementById(tempid).style.background="black";
+    }
+  }
+
+}
+
+pzFuncC.push(z2zzzzsetup);
+
+
+</script>
+<script>
+z1zzzzdiv="";
+
+function z1zzzzsetup()
+{
+  z1zzzzDivName = pzInitDiv();
+  z1zzzzdiv = document.getElementById(z1zzzzDivName);
+  z1zzzzdiv.innerHTML="<span>HELLO!!</span><hr>"+(new Date()).getTime();
+  z1zzzzdiv.style.position="absolute";
+  z1zzzzdiv.style.bottom="0px";
+  z1zzzzdiv.style.left="0px";
+
+}
+
+pzFuncC.push(z1zzzzsetup);
+
+</script>
+<script>
+z3zzzzdiv="";
+z3zzzzCan="";
+z3zzzzCTX="";
+z3zzzzTimeOut=setInterval(function(){},1000000);
+
+function z3zzzzsetup()
+{
+  z3zzzzDivName = pzInitDiv();
+  z3zzzzdiv = document.getElementById(z3zzzzDivName);
+  z3zzzzdiv.innerHTML="Random Art:<br><canvas id=\"z3zzzzCanvas\" width=\"300px\" height=\"300px\" onclick=\"z3zzzzAnimate()\"></canvas>";
+  z3zzzzdiv.style.position="absolute";
+  z3zzzzdiv.style.bottom="0px";
+  z3zzzzdiv.style.left="0px";
+}
+
+pzFuncC.push(z3zzzzsetup);
+
+function z3zzzzAnimate(){
+  z3zzzzCan = document.getElementById("z3zzzzCanvas");
+  z3zzzzCTX = z3zzzzCan.getContext("2d");
+
+  z3zzzzCTX.clearRect(0,0,300,300);
+
+  clearTimeout(z3zzzzTimeOut);
+
+  z3zzzzTimeOut=setInterval(function(){
+    z3zzzzCTX.beginPath();
+    z3zzzzCTX.moveTo(Math.floor(Math.random()*300),Math.floor(Math.random()*300));
+    z3zzzzCTX.lineTo(Math.floor(Math.random()*300),Math.floor(Math.random()*300));
+    z3zzzzCTX.closePath();
+    z3zzzzCTX.strokeStyle="rgb("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")";
+    z3zzzzCTX.stroke();
+  },1000);
+}
+
+</script>
+<script>
+z4zzzzdiv="";
+
+function z4zzzzsetup()
+{
+  z4zzzzDivName = pzInitDiv();
+  z4zzzzdiv = document.getElementById(z4zzzzDivName);
+  z4zzzzdiv.innerHTML="<span onclick=\"z4zzzzSay()\">Let\'s Hear a Math Problem!</span>";
+  z4zzzzdiv.style.position="absolute";
+  z4zzzzdiv.style.bottom="0px";
+  z4zzzzdiv.style.right="0px";
+
+}
+
+function z4zzzzSay(){
+  z4zzzza = Math.floor(Math.random()*100);
+  z4zzzzb = Math.floor(Math.random()*100);
+
+  theSynth = window.speechSynthesis;
+  utter = new SpeechSynthesisUtterance("The answer to "+z4zzzza+" times "+z4zzzzb+" is "+(z4zzzza*z4zzzzb));
+  utter.volume=0.05;
+  theSynth.speak(utter);
+
+  z4zzzzdiv.innerHTML="<span onclick=\"z4zzzzSay()\">Let\'s Hear a Math Problem!</span><br>"+"The answer to "+z4zzzza+" times "+z4zzzzb+" is "+(z4zzzza*z4zzzzb);
+}
+
+pzFuncC.push(z4zzzzsetup);
+
+</script>
+</head>
+<body>
+Panes (By aNerdist)<br>Click to pick up (red border) and (press z and click) to place.
+</body>
+</html>
+

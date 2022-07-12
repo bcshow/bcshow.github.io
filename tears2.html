@@ -1,0 +1,428 @@
+<html>
+<style>
+textarea{
+  background: #000000;
+}
+</style>
+<script>
+var contextZ = new AudioContext();
+var gainNodeZ = contextZ.createGain();
+gainNodeZ.gain.setValueAtTime(0.05, contextZ.currentTime);
+var oZ = contextZ.createOscillator();
+oZ.frequency.setTargetAtTime(Math.pow(2, (0-69)/12)*440, contextZ.currentTime, 0);
+oZ.start(0);
+oZ.connect(gainNodeZ);
+gainNodeZ.connect(contextZ.destination);
+
+
+duration=200;
+
+song1=[];
+song1=[55,0,55,0,55,0,55,0,55,0,55,0,55,0,55,0,60,0,60,0,64,0,64,0,67,0,67,0,64,0,0,0,65,0,65,0,62,0,62,0,59,0,59,0,55,0,0,0,60,0,60,0,64,0,64,0,67,0,67,0,64,0,0,0,72,0,72,0,66,0,66,0,67,0,0,0,0,0,0,0];
+
+function playSoundZ(m) {
+  oZ.frequency.setTargetAtTime(Math.pow(2, (m-69)/12)*440, contextZ.currentTime, 0);
+}
+
+nownote=0;
+setInterval(
+  function(){
+
+    playSoundZ(song1[nownote]);
+
+    nownote++;
+  },duration);
+
+
+var systory = window.speechSynthesis;
+
+function utstory(ina){
+  systory.cancel();
+  inut=new SpeechSynthesisUtterance(ina);
+  inut.volume=0.3;
+  systory.speak(inut);
+}
+
+var symini = window.speechSynthesis;
+
+function utmini(ina){
+  symini.cancel();
+  inut=new SpeechSynthesisUtterance(ina);
+  inut.volume=0.3;
+  symini.speak(inut);
+}
+
+
+var syfight = window.speechSynthesis;
+
+function utfight(ina){
+  syfight.cancel();
+  inut=new SpeechSynthesisUtterance(ina);
+  inut.volume=0.3;
+  syfight.speak(inut);
+}
+
+aa=50;
+bb=50;
+apts=0;
+bpts=0;
+window.roompos=0;
+
+window.onloadfunctions=[];
+
+window.onload=function(){
+  for(z=0;z<(window.onloadfunctions.length);z++){
+    window.onloadfunctions[z]();
+  }
+}
+
+window.roomloadfunctions=[];
+
+function roomload(){
+  for(y=0;y<(window.roomloadfunctions.length);y++){
+    window.roomloadfunctions[y]();
+  }
+}
+
+</script>
+<script>
+
+function roomroomload(){
+  roomout();
+}
+
+window.roomloadfunctions.push(roomroomload);
+
+roomnames=["Title Page","The Tree","The Sad Lisa","The Store","The Mountain","The Ending","The Last Page"];
+
+roomplan=[[1],[2],[3],[2,4],[3,5],[6],[]];
+
+function roomonload(){
+  roomsetup();
+}
+
+window.onloadfunctions.push(roomonload);
+
+function roomsetup(){
+  window.divroom = document.getElementById("divroom");
+  window.roompos = 0;
+  roomout();
+}
+
+function roomout(){
+  window.divroom.innerHTML = "";
+  for(r=0;r<roomplan[window.roompos].length;r++){
+    window.divroom.innerHTML += "<span onclick=\"roomgo("+roomplan[window.roompos][r]+")\">["+roomnames[roomplan[window.roompos][r]]+"]</span><br>";
+  }
+}
+
+function roomgo(inr){
+  window.roompos = inr;
+  roomload();
+}
+
+
+</script>
+<script>
+
+function miniroomload(){
+// STUFF
+}
+
+function minionload(){
+  window.minitotal=0;
+  window.miniscore=0;
+  minisetup();
+}
+
+window.onloadfunctions.push(minionload);
+window.roomloadfunctions.push(miniroomload);
+
+function minisetup(){
+  window.divmini = document.getElementById("divmini");
+  window.minitotal=0;
+}
+
+function minihit(){
+  scoreflag = (window.minitotal!==0?1:0); 
+  numb = Math.ceil(Math.random()*13);
+  numb = (numb > 10 ? 10 : numb);
+  window.minitotal += numb;
+
+
+// Code to Display Status Here
+  window.divmini.innerHTML = "The card is a "+numb+".<br>";
+  window.divmini.innerHTML += "Your Sum Is Now: "+window.minitotal+".<br>";
+  window.divmini.innerHTML += ((window.minitotal > 21)?"A bust.  Sorry!  No Points.":(window.minitotal > 17 ? "Yay!  5 points.":"You may choose to hit again or receive 1 point."))+"<br>";
+
+  wasscore = window.miniscore;
+
+  window.miniscore += scoreflag*((window.minitotal > 21) ? 0 : (window.minitotal > 17 ? 5 : 1 ));
+  
+  window.divmini.innerHTML += "Your total is "+window.miniscore+" points.";
+
+  if(Math.floor(Math.log(wasscore)/Math.log(5)) !== Math.floor(Math.log(window.miniscore)/Math.log(5))){
+    utmini("Dude, you should go card pro.  Card points,  "+window.miniscore);
+  }
+}
+
+
+</script>
+<script>
+
+fightplan=[2,6,11,16,21,30];
+playerlevel=0;
+
+function fightroomload(){
+// STUFF
+}
+
+function fightonload(){
+  window.fightcounter=0;
+  window.canfight=true;
+  fightsetup();
+  setInterval(function(){fight(aa,bb)},2000);
+}
+
+window.onloadfunctions.push(fightonload);
+window.roomloadfunctions.push(fightroomload);
+
+
+function fightsetup(){
+  window.divfight = document.getElementById("divfight");
+}
+
+function fight(){
+  ina = playerlevel;
+  inb = fightplan[window.roompos];
+  window.fightcounter++;
+  window.divfight.innerHTML = "Fight Stats: "+ina+" versus "+inb+" <br>";
+  window.divfight.innerHTML += (ina - inb + 10 * Math.random() - 5 > 0?"a won":"b won")+"<br>"+window.fightcounter+" "+(window.fightcounter > 1?"fights have":"fight has")+" occurred.";
+  if(window.divfight.innerHTML.indexOf("a won") + 1 > 0){
+    apts++;
+    if(inb > ina - 5){
+      waslevel = playerlevel;
+      playerlevel += inb/10;
+      playerlevel = Math.round(playerlevel*10)/10;
+      if(waslevel>0.3){
+      if(Math.floor(Math.log(waslevel)/Math.log(2)) !== Math.floor(Math.log(playerlevel)/Math.log(2)))
+      {
+        utfight("Your leveling is impressive!  Level "+playerlevel);
+      }
+      }
+    }
+  }
+  else{
+    bpts++;
+  }
+  window.divfight.innerHTML += "<br>Win Stats a:"+(apts)+" b:"+bpts;
+}
+
+</script>
+<script>
+
+packplan=[[],[],["0 of 1 times 1 Jar of Coins trades for 5583 Pennies"],["0 of 5 times 500 Pennies trades for 50 Candies","0 of 1 times 2000 Pennies trades for 1 Math Book","0 of 1 times 1800 Pennies trades for 1 Sax CD"],["0 of 5 times 50 Candies trades for 1 Tears of Lisa","0 of 1 times 1 Math Book trades for 1 Tears of Lisa","0 of 1 times 1 Sax CD trades for 1 Tears of Lisa"],[],[],[]];
+
+function packroomload(){
+  packout();
+}
+
+function packonload(){
+  window.canpack=true;
+  packsetup();
+  packadd("Jar of Coins");
+  packout();
+}
+
+window.onloadfunctions.push(packonload);
+window.roomloadfunctions.push(packroomload);
+
+
+function packsetup(){
+  window.packthe = [];
+  window.divpack = document.getElementById("divpack");
+}
+
+function packadd(ina){
+if(window.canpack){
+  for(a=0;a<window.packthe.length;a++){
+    if(window.packthe[a][0] === ina) {
+      window.packthe[a][1]++;
+      a = 2**30;
+    }
+  }
+  if(a === window.packthe.length) window.packthe.push([ina,1]);
+}
+}
+
+function packaddmass(ina,inb){
+if(window.canpack){
+  if(Number.isInteger(inb)){
+    for(a=0;a<window.packthe.length;a++){
+      if(window.packthe[a][0] === ina) {
+        window.packthe[a][1] += inb;
+        a = 2**30;
+      }
+    }
+  if(a === window.packthe.length) window.packthe.push([ina,inb]);
+  }
+}
+}
+
+function packremove(ina){
+if(window.canpack){
+  for(a=0;a<window.packthe.length;a++){
+    if((window.packthe[a][0] === ina)&&(window.packthe[a][1] > 0)) window.packthe[a][1]--;
+  }
+}
+}
+
+function packout(){
+if(window.canpack){
+  window.divpack.innerHTML="";
+  for(a=0;a<window.packthe.length;a++){
+    window.divpack.innerHTML += window.packthe[a][0]+":"+window.packthe[a][1]+"<br>";
+  }
+  for(a=0;a<packplan[window.roompos].length;a++){
+    window.divpack.innerHTML += "<span onclick=\"packio("+window.roompos+","+a+")\">"+packplan[window.roompos][a]+"</span><br>";
+  }
+}
+}
+
+function packio(inpos,inaaa){
+  instring = packplan[inpos][inaaa];
+  start = instring.substring(0,instring.indexOf(" trades for "));
+  gets = instring.substring(instring.indexOf(" trades for ")+12,instring.length);
+  doneq = parseInt(start);
+  donemax = parseInt(start.substring(start.indexOf(" of ")+4,start.length));
+  needs = start.substring(start.indexOf(" times ")+7,start.length);
+  needsq = parseInt(needs);
+  needsn = needs.substring(needs.indexOf(" ")+1,needs.length);
+  getsq = parseInt(gets);
+  getsn = gets.substring(gets.indexOf(" ")+1,gets.length);
+  for(ppa=0;ppa<window.packthe.length;ppa++){
+    if(window.packthe[ppa][0] === needsn) {
+      hascount = window.packthe[ppa][1];
+    }
+  }
+  if((hascount >= needsq)&&(doneq<donemax)) {
+    packremovemass(needsn,needsq);
+    packaddmass(getsn,getsq);
+    aaaa = packplan[window.roompos].indexOf(instring);
+    lara = packplan[window.roompos][aaaa];
+    packplan[window.roompos][aaaa] = (doneq+1).toString()+lara.substring(lara.indexOf(" "),lara.length);
+  }
+  packout();
+}
+
+
+function packremovemass(ina,inb){
+if(window.canpack){
+  for(a=0;a<window.packthe.length;a++){
+    if((window.packthe[a][0] === ina)&&(window.packthe[a][1] - inb >= 0)) window.packthe[a][1]-=inb;
+  }
+}
+}
+
+</script>
+<script>
+
+function storyroomload(){
+  storysetup();
+  storyout();
+}
+
+
+
+function storyonload(){
+  window.canstory=true;
+  storysetup(1);
+  storyreset();
+  storyout();
+}
+
+window.onloadfunctions.push(storyonload);
+window.roomloadfunctions.push(storyroomload);
+
+function storysetup(){
+  divname = "textareastory"+window.roompos;
+
+  window.storythe = [];
+
+  window.divstory = document.getElementById("divstory");
+  window.storythe = (document.getElementById(divname).value).split("\n");
+  window.storynow = 0;
+}
+
+function storyreset(){
+if(canstory){
+  window.storynow = 0;
+}
+}
+
+function storyout(){
+if(canstory){
+  if(window.storynow < window.storythe.length){
+    nowhtml = window.storythe[window.storynow];
+    if(nowhtml.substring(0,6) === "!text:") {
+      window.divstory.innerHTML = nowhtml.substring(6,nowhtml.length);
+      utstory(nowhtml.substring(6,nowhtml.length));
+    }
+    window.storynow++;
+  }
+}
+}
+
+</script>
+<body>
+Go To Area:
+<div id="divroom" style="background: #80ffff"></div><hr>
+Story: (click the next line below to continue)
+<div id="divstory" onclick="storyout()" style="background: #ff80ff"></div><hr>
+Backpack:
+<div id="divpack" onclick="packout()" style="background: #ffff80"></div>
+<hr>
+Fight: (once every 2 seconds with stats below)
+<div id="divfight" style="background: #c0c0c0"></div><hr>
+<i>A bit like blackjack.  You get 1 point every time you press the HIT ME button and 5 points if the sum is from 18 to 21 inclusive.  You get no points if you bust.</i><br>
+Mini-Game: <span onclick="minihit()" style="background: #80ff80">[Hit Me]</span> <span onclick="minisetup(); minihit();" style="background: #80ff80">[Next Hand]</span>
+<div id="divmini" style="background: #80ff80"></div>
+<hr>
+Data:
+<textarea id="textareastory0">!text: Making Lisa Happy
+!text: By Positrondx
+!text: Not Edited By Marge Simpson
+!text: Once Upon A Time ... (Go To The Next Area...)</textarea>
+<textarea id="textareastory1">!text: In the kingdom of Sprintfield lived a beautiful tree.
+!text: It was said to produce a most marvelous violin-like sound.
+!text: It was said to alleviate all sorrow.
+!text: Unfortunately it was at the top of a very, very tall mountain.
+!text: No one visited it for 100s of years and all that was said was only rumor.
+!text: (Next Area ...)</textarea>
+<textarea id="textareastory2">!text: Here we meet The Simpsons.
+!text: Bart, the older brother, found his sister, Lisa, crying.
+!text: She would not tell him what sad thoughts she had in her head and she continued to cry for weeks.
+!text: Bart the decided he would cheer her up with some presents.
+!text: He picked up his jar of change.
+!text: (Next Area ...)</textarea>
+<textarea id="textareastory3">!text: He went to the store with his jar of change to buy things to cheer her up.
+!text: He bought candy, a used math textbook, and a saxophone CD.
+!text: He returned home to give her these presents.
+!text: (Next Area ...)</textarea>
+<textarea id="textareastory4">!text: At the house, he only saw her cry more.
+!text: He then remembered the legend of the tree at the top of the mountain.
+!text: He went out to find someone to go with him, but he did not have enough money.
+!text: Lying through his teeth, he promised those going with him he would pay later.
+!text: (Next Area ...)</textarea>
+<textarea id="textareastory5">!text: They got to the top and he brought the bush back to his house.
+!text: The tree cheered Lisa up!
+!text: Oh, and Homer's wallet was atop the mountain from that other Simpson's episode so Bart was able to pay the people who climbed to the top with him.
+!text: (Next Area ...)</textarea>
+<textarea id="textareastory6">!text: The End
+!text: No, Really. :)
+!text: The End</textarea>
+
+<p onclick="alert('Different areas have different level mobs.  To be sure you are high enough level to defeat mobs in the next area, we recommend you level to TWO TIMES the mobs in the current area.')" style="background: #8080ff">Click here for the official "Fight!" strategy guide</p>
+
+</body>
+</html>

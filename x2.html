@@ -1,0 +1,186 @@
+<html>
+<style>
+body {
+  background: black;
+  color: white;
+  font-size: 24pt;
+}
+</style>
+<script>
+shtml="<center>o<br>/O\\<br>LL</center>";
+bhtml="O";
+
+nowalt=0;
+
+grav=50;
+
+diffy = 0;
+diffx = 0;
+
+annow=0;
+anagain=0;
+antime=0;
+var antimeout;
+
+posx=0;
+posy=0;
+
+posjx=0;
+posjy=0;
+
+window.onmousedown=function(){
+  if(annow===0){
+    initjump(event.pageX,event.pageY);
+  }
+  else if(annow===1 && anagain===0){
+    diffyt = 910-parseInt(event.pageY) - posjy;
+    diffxt = parseInt(event.pageX) - posjx;
+    if(diffyt > 0){
+      diffy = 910-parseInt(event.pageY) - posjy;
+      diffx = parseInt(event.pageX) - posjx;
+      posx = posjx;
+      posy = posjy;
+      anagain = 1;
+      antime = 0;
+    }
+  }
+}
+
+window.onkeydown=function(){
+  if(event.keyCode === 32){
+    if(annow === 1) nowalt=(posjy-1)-(posjy-1)%200;
+    if(annow === 0) {
+      nowalt=(posy-1)-(posy-1)%200;
+      posy = nowalt;
+      if(posy<0) posy=0;
+      document.getElementById("divx").innerHTML = shtml;
+      document.getElementById("divx").style.left = (posx+5)+"px";
+      document.getElementById("divx").style.bottom = posy+"px";
+    }
+  }
+  if(event.keyCode === 81){
+    initrang(-1,1);
+  }
+  if(event.keyCode === 87){
+    initrang(0,1);    
+  }
+  if(event.keyCode === 69){
+    initrang(1,1); 
+  }
+  if(event.keyCode === 65){
+    initrang(-1,0);
+  }
+  if(event.keyCode === 68){
+    initrang(1,0);
+  }
+  
+  if(annow===0){
+    if(event.keyCode === 79) {
+      posx -= 25;
+      if(posx < 0) posx = 0;
+    }
+    if(event.keyCode === 80) {
+      posx += 25;
+      if(posx > 1600) posx = 1600;    
+    }
+    document.getElementById("divx").innerHTML = shtml;
+    document.getElementById("divx").style.left = (posx+5)+"px";
+    document.getElementById("divx").style.bottom = posy+"px";
+  }
+}
+
+function initjump(inx,iny){
+  diffy = 910 - parseInt(iny) - posy;
+  diffx = parseInt(inx) - posx;
+  if(annow === 0  && diffy > 0){
+    annow = 1;
+    antime = 0;
+    antimeout = setInterval(function(){
+      tfall = Math.sqrt(diffy*2/grav);
+      vinit=tfall*grav;
+      diffnow = 0 + vinit*antime - (1/2)*grav*(antime)*(antime);
+
+      posjx = (posx+5+diffx/tfall*antime);
+      posjy = (posy+diffnow);
+
+      document.getElementById("divx").innerHTML = bhtml;
+      document.getElementById("divx").style.left = (posx+5+diffx/tfall*antime)+"px";
+      document.getElementById("divx").style.bottom = (posy+diffnow)+"px";  
+
+      if(posjy<nowalt){
+        annow=0;
+        anagain=0;
+        posx = posjx;
+        posjy = nowalt;
+        posy = nowalt;
+        if(posx < 0) posx = 0;
+        if(posx > 1600) posx = 1600;
+        document.getElementById("divx").innerHTML = shtml;
+        document.getElementById("divx").style.left = (posx+5)+"px";
+        document.getElementById("divx").style.bottom = posy+"px";  
+
+        clearTimeout(antimeout);
+      }
+      antime+=0.25;
+    },100);
+  }  
+}
+
+anrang=0;
+rcount=0;
+rangx=0;
+rangy=0;
+rincx=0;
+rincy=0;
+var arto;
+
+colnow=0;
+colors=["red","blue","green","purple","orange","yellow","gray","magenta","cyan"];
+
+function initrang(incx,incy){
+  if(anrang===0){
+    anrang=1;
+    rincx=incx;
+    rincy=incy;
+    rangx=(annow===0?posx:posjx);
+    rangy=(annow===0?posy:posjy);
+    rcount=0;
+    arto = setInterval(function(){
+      document.getElementById("divr").style.visibility="visible";
+      rangx+=rincx*15;
+      rangy+=rincy*15;
+      document.getElementById("divr").style.left=rangx+"px";
+      document.getElementById("divr").style.bottom=rangy+"px";
+      if((rangx-tarx)**2 + (rangy-tary)**2 < 400){
+        document.getElementById("divt").style.color=colors[colnow%colors.length];
+        colnow++;
+        tary=Math.floor(Math.random()*800+110);
+        tarx=Math.floor(Math.random()*1600);
+        document.getElementById("divt").style.left=tarx+"px";
+        document.getElementById("divt").style.bottom=tary+"px";
+      }
+      rcount++;
+      if(rcount > 15){
+        clearTimeout(arto);
+        document.getElementById("divr").style.visibility="hidden";
+        anrang=0;
+      }
+    },100);
+  }
+}
+
+tary=Math.floor(Math.random()*800+110);
+tarx=Math.floor(Math.random()*1600);
+
+window.onload=function(){
+  document.getElementById("divt").style.left=tarx+"px";
+  document.getElementById("divt").style.bottom=tary+"px";
+}
+</script>
+<body>
+<p>Press O and P to move left and right.  Click to jump!  "Space" to change levels.  Q,W,E,A,D to throw the "rang"</p>
+<div id="divx" style="position: absolute; left: 0px; bottom: 0px"><center>o<br>/O\<br>LL</center></div>
+<div id="divr" style="position: absolute; left: 0px; bottom: 0px; visibility: hidden">O</div>
+<div id="divt" style="position: absolute; left: 0px; bottom: 0px">Z</div>
+</body>
+</html>

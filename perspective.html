@@ -1,0 +1,203 @@
+<html>
+<style>
+body {
+  color: white;
+  font-size: 24pt;
+}
+</style>
+<script>
+
+pat1="0000000000000000000000000000000000001110011100000001000110001000001000000000010000100110011001000010100110010100001001000010010000100010010001000001000110001000000010000001000000000100001000000000001001000000000000011000000000000000000000000000000000000000";
+pat2="0000000000000000000000000000000000111000000001000010010000001000001110000001000000100100001000000011100001000000000000001000000000100001000000000001001000011100000011000010000000001100001000000001001000100000001000010001110000000000000000000000000000000000";
+
+
+dims = 16;
+pixs = 600;
+
+window.onkeydown=function(){
+
+dpix();
+
+data3d();
+
+  setint = setInterval(function(){vz=vz+3;  angz+=0.03; ctx.clearRect(0,0,pixs,pixs); drawframe(); if(vz>10) vz=-6000;},50);
+
+}
+
+angz = 0;
+
+k = 400;
+
+vx = 0;
+vy = 0;
+vz = -6000;
+
+ppts=[[1,-1,1],[1,-1,-1],[-1,-1,1],[-1,-1,-1],[0,1,0]];
+
+pcount = 6000;
+
+rx=[];
+ry=[];
+rz=[];
+
+izz=["data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFhAJ/wlseKgAAAABJRU5ErkJggg==","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="];
+
+matfr=[];
+matsi=[];
+
+for(a1=0;a1<dims;a1++){
+  matfr[a1]=[];
+  for(a2=0;a2<dims;a2++){
+    matfr[a1][a2]=((a2 ===0 && a1%2 === 1)|| (a2=== dims - 1 && a1%2 === 0) || (a1 === 0 && a2%2 === 1) || (a1 === dims-1 && a2%2 === 0)? 1:parseInt(pat1.substring(a1*dims+a2,a1*dims+a2+1)));
+  }
+}
+
+for(a1=0;a1<dims;a1++){
+  matsi[a1]=[];
+  for(a2=0;a2<dims;a2++){
+    matsi[a1][a2]=((a2 ===0 && a1%2 === 0)|| (a2=== dims - 1 && a1%2 === 1) || (a1 === 0 && a2%2 === 0) || (a1 === dims-1 && a2%2 === 1)? 1:parseInt(pat2.substring(a1*dims+a2,a1*dims+a2+1)));
+  }
+}
+
+function data3d(){
+  rx = [];
+  ry = [];
+  rz = [];
+
+
+for(d=0;d<pcount;d++){
+
+  max = 500;
+
+  zx=Math.random()*max*2-max;
+  zy=Math.random()*max*2-max;
+  zz=Math.random()*max*2-max;
+
+   if((matfr[Math.floor(dims - zy/(2*max/dims)) -  dims/2][Math.floor(zx/(2*max/dims)) + dims/2] === 1)&&(matsi[Math.floor(dims - zy/(2*max/dims)) - dims/2][Math.floor(zz/(2*max/dims)) + dims/2] === 1)){
+    rx.push(Math.floor(zx));
+    ry.push(Math.floor(zy));
+    rz.push(Math.floor(zz));
+  }
+  else{
+    d--;
+  }
+  
+}
+
+}
+
+data3d();
+
+
+function dpix(){
+
+  outhtml="FRONT<br>";
+
+  for(aa=0;aa<dims;aa++){
+
+    for(bb=0;bb<dims;bb++){
+
+      outhtml += "<img width=\"20px\" id=\"imga"+aa+bb+"\" onclick=\"inclicka("+aa+","+bb+")\" src=\""+izz[matfr[aa][bb]]+"\" style=\"border: red 1px solid\">";
+
+    }
+    outhtml+="<br>";
+
+  }
+
+  document.getElementById("td111").innerHTML=outhtml;
+
+  outhtml="SIDE<br>";
+
+  for(aa=0;aa<dims;aa++){
+
+    for(bb=0;bb<dims;bb++){
+
+      outhtml += "<img width=\"20px\" id=\"imgb"+aa+bb+"\" onclick=\"inclickb("+aa+","+bb+")\" src=\""+izz[matsi[aa][bb]]+"\" style=\"border: red 1px solid\">";
+
+    }
+    outhtml+="<br>";
+
+  }
+
+  document.getElementById("td222").innerHTML=outhtml;
+
+}
+
+window.onload=function(){
+
+  dpix();
+  setint = setInterval(function(){vz=vz+5; angz+=0.03; ctx.clearRect(0,0,pixs,pixs); drawframe();},50);
+}
+
+function inclicka(ina, inb){
+  matfr[ina][inb] = (matfr[ina][inb] +1)%2;
+  dpix();
+  data3d();
+}
+
+function inclickb(ina, inb){
+  matsi[ina][inb] = (matsi[ina][inb] +1)%2;
+  dpix();
+  data3d();
+}
+
+function drawframe(){
+
+  for(c=0;c<pcount;c++){
+
+  for(apt=0;apt<ppts.length;apt++){
+  for(bpt=apt+1;bpt<ppts.length;bpt++){
+
+
+  dx1z = rx[c] + ppts[apt][0];
+  dz1z = rz[c] + ppts[apt][2];
+  dx2z = rx[c] + ppts[bpt][0];
+  dz2z = rz[c] + ppts[bpt][2];
+
+  dx1 = Math.cos(angz)*dx1z - Math.sin(angz)*dz1z - vx;
+  dz1 = Math.cos(angz)*dz1z + Math.sin(angz)*dx1z - vz;
+  dx2 = Math.cos(angz)*dx2z - Math.sin(angz)*dz2z - vx;
+  dz2 = Math.cos(angz)*dz2z + Math.sin(angz)*dx2z - vz;
+
+
+  if((dz1>0) && (dz2>0)){
+
+  dy1 = ry[c] + ppts[apt][1]-vy;
+
+  fx1 = dx1/dz1*k+pixs/2;
+  fy1 = dy1/dz1*k+pixs/2;
+  fy1 = pixs - fy1;
+
+  dy2 = ry[c] + ppts[bpt][1]-vy;
+
+  fx2 = dx2/dz2*k+pixs/2;
+  fy2 = dy2/dz2*k+pixs/2;
+  fy2 = pixs - fy2;
+
+  ctx.beginPath();
+  ctx.moveTo(fx1,fy1);
+  ctx.lineTo(fx2,fy2);
+  ctx.closePath();
+  ctx.strokeStyle="#7ff";
+  ctx.stroke();
+
+  }
+  }
+  }
+  }
+
+}
+
+</script>
+<body bgcolor="black" onclick="clearTimeout(setint)">
+
+<table><tr><td><canvas id="cancan" width="600px" height="600px" style="border: 1px white solid"></canvas>
+</td><td id="td111"></td><td id="td222"></td></tr></table>
+<Br>
+Click This Page to Halt Animation. Click squares to change shape.  Press Any Key To Restart Animation.  Have Fun!! :)<Br>
+
+<script>
+ctx = document.getElementById("cancan").getContext("2d");
+</script>
+</body>
+</html>

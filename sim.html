@@ -1,0 +1,36 @@
+<html>
+<script>
+
+commands=["Start","Begin Stream","Bellum Gives Bits","Positron Tells A Math Joke","People Laugh"];
+activate=[[1],[2,3,4],[4],[4],[4]];
+actnext=[0];
+
+let progress="progress:<br>";
+txxt="all tries:<br>";
+
+function subby(){
+  inin = document.getElementById("intxt").value.toString();
+  document.getElementById("intxt").value="";
+  txxt = txxt + inin + "<br>";
+  document.getElementById("outxt").innerHTML=txxt;
+  for(a=0; a<actnext.length; a++){
+    if(commands[actnext[a]] === inin){
+      progress+=inin+"<br>";
+      posx=actnext[a];
+      actnext.splice(a,1);
+      for(b=0; b<activate[posx].length; b++){
+        actnext.push(activate[posx][b]);
+      }
+    }
+  }
+  document.getElementById("nowy").innerHTML=progress;
+}
+
+</script>
+<body>
+<center><div id="nowy"></div>
+<input id="intxt" type="text"><br>
+<input onclick="subby()" type="button" value="ENTER">
+<div id="outxt"></div></center>
+</body>
+</html>
