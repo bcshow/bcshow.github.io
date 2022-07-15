@@ -80,8 +80,6 @@ const synth = window.speechSynthesis;
 newscounter=0;
 timecounter=0;
 seenitflag=false;
-voicecount=23;
-voicelist=[17,25,26,28,32];
 
 window.onload=function(){
   setInterval(function(){
@@ -91,8 +89,7 @@ window.onload=function(){
       document.getElementById('closedcaptioning').innerHTML=newstext[newscounter]+"<hr>"+document.getElementById('closedcaptioning').innerHTML;
       let utterance = new SpeechSynthesisUtterance(newstext[newscounter]);
       voices = synth.getVoices();
-      alert(voicecount);
-      utterance.voice=voices[voicelist[voicecount]];
+      utterance.voice=voices[29];
       voicecount++;
       speechSynthesis.speak(utterance);
       seenitflag=true;
