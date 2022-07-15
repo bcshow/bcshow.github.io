@@ -135,7 +135,7 @@ window.onload=function(){
       utterance.voice=voices[33];
       speechSynthesis.speak(utterance);
       document.getElementById('m4a1').src=newsound[newscounter]+".m4a";
-      document.getElementById('m4a1').play();
+      document.getElementById('audioo').play();
       seenitflag=true;
     }
     timecounter+=1000;
@@ -154,7 +154,7 @@ window.onload=function(){
 
 <center id="closedcaptioning"></center>
 
-<audio controls preload="none" style="width:480px;">
+<audio id="audioo" controls preload="none" style="width:480px;">
 <source id="m4a1" type="audio/m4a" />
 <p>Your browser does not support HTML5 audio.</p>
 </audio>
