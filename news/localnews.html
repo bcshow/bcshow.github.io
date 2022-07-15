@@ -90,7 +90,6 @@ window.onload=function(){
       let utterance = new SpeechSynthesisUtterance(newstext[newscounter]);
       voices = synth.getVoices();
       utterance.voice=voices[26];
-      voicecount++;
       speechSynthesis.speak(utterance);
       seenitflag=true;
     }
