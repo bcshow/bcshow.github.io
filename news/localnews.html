@@ -134,6 +134,7 @@ window.onload=function(){
       voices = synth.getVoices();
       utterance.voice=voices[33];
       speechSynthesis.speak(utterance);
+      alert(newsound[newscounter]);
       document.getElementById('m4a1').src=newsound[newscounter]+".m4a";
       seenitflag=true;
     }
