@@ -81,6 +81,7 @@ newscounter=0;
 timecounter=0;
 seenitflag=false;
 voicecount=23;
+voicelist=[17,25,26,28,32];
 
 window.onload=function(){
   setInterval(function(){
@@ -91,7 +92,7 @@ window.onload=function(){
       let utterance = new SpeechSynthesisUtterance(newstext[newscounter]);
       voices = synth.getVoices();
       alert(voicecount);
-      utterance.voice=voices[voicecount];
+      utterance.voice=voices[voicelist[voicecount]];
       voicecount++;
       speechSynthesis.speak(utterance);
       seenitflag=true;
