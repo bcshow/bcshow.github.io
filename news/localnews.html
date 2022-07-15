@@ -23,7 +23,7 @@ newsstyle.push("font-size: 24pt");
 newstext.push("Kennedy Moon Speech!");
 newspics.push("blank.png");
 newstime.push(20000);
-newsound.push("jfk00002.m4a");
+newsound.push("jfk00002");
 
 newsstyle.push("font-size: 24pt");
 newstext.push("Star Trek: Strange New Worlds, streamed the Season 1 Finale this past week.");
@@ -134,7 +134,8 @@ window.onload=function(){
       voices = synth.getVoices();
       utterance.voice=voices[33];
       speechSynthesis.speak(utterance);
-      document.getElementById('m4a1').src=newsound[newscounter].m4a;
+      document.getElementById('m4a1').src=newsound[newscounter]+".m4a";
+      document.getElementById('m4a1').play();
       seenitflag=true;
     }
     timecounter+=1000;
