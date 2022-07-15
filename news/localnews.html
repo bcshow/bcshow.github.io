@@ -13,9 +13,14 @@ newspics=[];
 newstime=[];
 
 newsstyle.push("font-size: 36pt");
-newstext.push("Science News!  Sunday, July 10th, 2022.");
+newstext.push("Electron News!  Thursday, July 14th, 2022.");
 newspics.push("newslogo.png");
 newstime.push(5000);
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Last Chess Game Played!");
+newspics.push("chessgame00001.gif");
+newstime.push(180000);
 
 newsstyle.push("font-size: 24pt");
 newstext.push("Star Trek: Strange New Worlds, streamed the Season 1 Finale this past week.");
@@ -98,8 +103,9 @@ window.onload=function(){
 
 </script>
 <body>
-<center><img id="mainimg" src="newslogo.png" width="600px"><img src="blankk.jpg" width="1%" height="90%"></center>
+<center><img id="mainimg" src="newslogo.png" width="600px"><img src="blank.png" width="1%" height="90%"></center>
 
 <center id="closedcaptioning"></center>
+  <div  style="position: absolute; right: 0px; top: 0px; font-size: 16pt"><img id="sideimg" width="200px"><br><p id="sideclosedcaptioning"></p></div>
 </body>
 </html>
