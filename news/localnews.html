@@ -89,6 +89,7 @@ window.onload=function(){
       document.getElementById('closedcaptioning').innerHTML=newstext[newscounter]+"<hr>"+document.getElementById('closedcaptioning').innerHTML;
       let utterance = new SpeechSynthesisUtterance(newstext[newscounter]);
       voices = synth.getVoices();
+      alert(voices);
       utterance.voice=voices[41];
       speechSynthesis.speak(utterance);
       seenitflag=true;
