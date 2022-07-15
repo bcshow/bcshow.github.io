@@ -1,0 +1,166 @@
+<html>
+<style>
+body {
+  color: white;
+  background: black;
+}
+</style>
+<script>
+
+newsstyle=[];
+newstext=[];
+newspics=[];
+newstime=[];
+newsound=[];
+
+newsstyle.push("font-size: 24pt");
+newstext.push("ELECTRON NEWS!  Mostly STEM news.  Thursday, July 14th, 2022.");
+newspics.push("newslogo.png");
+newstime.push(5000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Kennedy Moon Speech!");
+newspics.push("blank.png");
+newstime.push(70000);
+newsound.push("jfk00002");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Star Trek: Strange New Worlds, streamed the Season 1 Finale this past week.");
+newspics.push("STSNW.svg.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Star Trek: Lower Decks, will stream Season 3 on August 6th.");
+newspics.push("STLD.svg.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Star Trek: Picard, has announced the third season is its final season.");
+newspics.push("STPicard.svg.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Star Trek: Prodigy, is an animated Star Trek Series.");
+newspics.push("STP.svg.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Star Trek: Discovery, follows the story of Spock's foster sister.");
+newspics.push("STD.svg.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Ad Time!  Let me introduce you to Lok lok fa fa!!  He streams STEM with an emphasis on electrical engineering!");
+newspics.push("loklok00001.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Use the command !alok and see what he has been up to recently!");
+newspics.push("loklok00002.png");
+newstime.push(20000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("A recent chess game I played. (70 seconds)");
+newspics.push("chessgame00002.gif");
+newstime.push(70000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Space Facts: Pioneer 10, a NASA spacecraft, photographed Jupiter in 1973");
+newspics.push("pioneer1.jpg");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Space Facts: Pioneer 11, a NASA spacecraft, photographed Jupiter in 1975 and Saturn in 1979.");
+newspics.push("pioneer2.jpg");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Space Facts: Voyager 1, a NASA spacecraft, photographed Jupiter in 1979 and Saturn in 1980.");
+newspics.push("voyager1.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Space Facts: Voyager 2, a NASA spacecraft, photographed Jupiter, Saturn, Uranus, and Neptune.");
+newspics.push("voyager2.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("Space News: Voyager 1 and 2 are still operational and are still communicating with NASA today!");
+newspics.push("voyager1.png");
+newstime.push(10000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("A recent chess game I played.");
+newspics.push("chessgame00003.gif");
+newstime.push(100000);
+newsound.push("");
+
+newsstyle.push("font-size: 24pt");
+newstext.push("A recent chess game I played.");
+newspics.push("chessgame00001.gif");
+newstime.push(180000);
+newsound.push("");
+
+</script>
+<script>
+
+const synth = window.speechSynthesis;
+
+newscounter=0;
+timecounter=0;
+seenitflag=false;
+
+window.onload=function(){
+  setInterval(function(){
+    if(!seenitflag) {
+      document.getElementById('mainimg').src=newspics[newscounter];
+      document.getElementById('closedcaptioning').style=newsstyle[newscounter];
+      document.getElementById('closedcaptioning').innerHTML=newstext[newscounter]+"<hr>"+document.getElementById('closedcaptioning').innerHTML;
+      let utterance = new SpeechSynthesisUtterance(newstext[newscounter]);
+      voices = synth.getVoices();
+      utterance.voice=voices[33];
+      speechSynthesis.speak(utterance);
+      document.getElementById('m4a1').src=newsound[newscounter]+".m4a";
+      setTimeout(function(){
+        document.getElementById('audioo').play();
+      },1000);
+      seenitflag=true;
+    }
+    timecounter+=1000;
+    if(newstime[newscounter] < timecounter){
+      timecounter=0;
+      seenitflag=false;
+      newscounter++;
+//      outtext = newstext[newscounter];
+    }
+  },1000);
+}
+
+</script>
+<body>
+<center><img src="blank.png" width="1%" height="90%"><img id="mainimg" src="newslogo.png" width="550px"><img src="blank.png" width="1%" height="90%"></center>
+
+<center id="closedcaptioning"></center>
+
+<audio id="audioo" controls autoplay preload="none" style="width:480px;">
+<source id="m4a1" type="audio/mp4" />
+<p>Your browser does not support HTML5 audio.</p>
+</audio>
+
+<div  style="position: absolute; right: 0px; top: 0px; font-size: 16pt"><img id="sideimg" width="200px"><br><p id="sideclosedcaptioning"></p></div>
+</body>
+</html>
