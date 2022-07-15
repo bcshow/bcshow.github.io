@@ -22,7 +22,7 @@ newsound.push("");
 newsstyle.push("font-size: 24pt");
 newstext.push("Kennedy Moon Speech!");
 newspics.push("blank.png");
-newstime.push(20000);
+newstime.push(70000);
 newsound.push("jfk00002");
 
 newsstyle.push("font-size: 24pt");
@@ -135,7 +135,9 @@ window.onload=function(){
       utterance.voice=voices[33];
       speechSynthesis.speak(utterance);
       document.getElementById('m4a1').src=newsound[newscounter]+".m4a";
-      document.getElementById('audioo').play();      
+      setTimeout(function(){
+        document.getElementById('m4a1').play();
+      },1000);
       seenitflag=true;
     }
     timecounter+=1000;
