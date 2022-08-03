@@ -1,0 +1,133 @@
+<html>
+<script>
+var audioall;
+var song;
+var title;
+var songa;
+var songb;
+var songc;
+var counter=-8;
+var songs=[];
+
+window.onload=function(){
+  audioall=document.getElementsByTagName("audio");
+//  song = prompt("song?","115566504433221055443320554433201155665044332210");
+  songs.push(["Brother John","10203010102030103040500030405000565430105654301010501000105010000000000000000000","00000000102030101020301030405000304050005654301056543010105010001050100000000000","00000000000000001020301010203010304050003040500056543010565430101050100010501000"]);
+
+  songs.push(["Eyes On Me (in one octave)","501020305000000000231000012000000510203050700000007860005600000067800000600050003060005040023000003002040320010000210000023500000000","000000000030000000000000200000000000000000000000000000000050000000008070006000000500600000400000000300000002000000002000000020000000","000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000"]);
+
+  menucount=0;
+
+  while(!(confirm("Play "+songs[menucount][0]+"?"))){
+    menucount++;
+  }
+
+  if(menucount === songs.length) menucount=0;
+
+  title=songs[menucount][0];
+  songa=songs[menucount][1];
+  songb=songs[menucount][2];
+  songc=songs[menucount][3];
+
+  document.body.innerHTML = "<h1>Sorry, here's a bad sounding:<br>"+title+"</h1>"+document.body.innerHTML;
+
+  setInterval(function(){
+
+    if(counter+ 1 > 0){
+    nowa = songa.substring(counter,counter+1);
+    nowb = songb.substring(counter,counter+1);
+    nowc = songc.substring(counter,counter+1);
+    audioall[eval(nowa)].play();
+    audioall[eval(nowb)+9].play();
+    audioall[eval(nowc)+18].play();
+    }
+    counter++;
+  },300);
+}
+
+
+</script>
+<body>
+<audio controls>
+<source src="100.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="20.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="21.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="22.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="23.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="24.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="25.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="26.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="27.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="100.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="20.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="21.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="22.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="23.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="24.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="25.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="26.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="27.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="100.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="20.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="21.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="22.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="23.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="24.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="25.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="26.m4a" type="audio/mp4">
+</audio>
+<audio controls>
+<source src="27.m4a" type="audio/mp4">
+</audio>
+</body>
+</html>
